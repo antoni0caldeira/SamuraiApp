@@ -7,7 +7,7 @@ namespace SamuraiApp.UI
 {
     class Program
     {
-        private static SamuraiContext _context = new SamuraiContext();
+        private static readonly SamuraiContext _context = new();
 
         private static void Main(string[] args)
         {
@@ -21,7 +21,7 @@ namespace SamuraiApp.UI
 
         private static void AddSamurai()
         {
-            Samurai samurai = new Samurai { Name = "Asamue" };
+            Samurai samurai = new() { Name = "Asamue" };
             _context.Samurais.Add(samurai);
             _context.SaveChanges();
         }
