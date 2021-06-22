@@ -15,9 +15,20 @@ namespace SamuraiApp.UI
 
             //AddSamuraisByName("Julie", "Sampson", "Julie", "Sampson");
             //AddVariusTypes();
-            GetSamurais();
+            //GetSamurais();
+            QueryAggregates();
             Console.Write("Press any key...");
             Console.ReadKey();
+        }
+
+        private static void QueryAggregates()
+        {
+            //var name = "Sampson";
+            //var samurai = _context.Samurais.Where(x => x.Name == name).FirstOrDefault();
+            //var samurai = _context.Samurais.FirstOrDefault(x => x.Name == name);
+            var samurai = _context.Samurais.Find(3);//Metodo de dbset especifico para encontrar por key.
+
+            Console.WriteLine($"{ samurai.Name} { samurai.Id}");
         }
 
         private static void AddVariusTypes()
@@ -50,16 +61,16 @@ namespace SamuraiApp.UI
         }
         private static void GetSamurais()
         {
-            var query = _context.Samurais
-                .Where(x => x.Name.Contains("Julie") || EF.Functions.Like(x.Name, "%Shimada%"))
+            var samurais = _context.Samurais
+                .Where(x => x.Name.Contains("Julie") || EF.Functions.Like(x.Name, "%hi%"))
                 .TagWith("From get")
                 .ToList()
                 .OrderBy(n => n.Name);
-            foreach (var item in query)
+            foreach (var samurai in samurais)
             {
-                Console.WriteLine(item.Name);
+                Console.WriteLine(samurai.Name);
             }
-            Console.WriteLine($" Samurai count is {query.Count()}");
+            Console.WriteLine($" Samurai count is {samurais.Count()}");
 
         }
     }
